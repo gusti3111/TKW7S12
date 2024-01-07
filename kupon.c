@@ -1,45 +1,48 @@
 #include <stdio.h>
 
-struct pembelian
-{
+// Struct untuk menyimpan informasi pembelian
+struct Pembelian {
     float total_pembelian;
-    float discount_percentage;
-    int jumlah_coupon;
-    float total_pembayaran;
+    int jumlah_kupon;
+    float diskon;
+    float total_bayar;
 };
 
-void hitung_pembayaran(struct pembelian *total)
-{
-    // Input all components of the pembelian structure
-    printf("Total pembelian: \n");
-    scanf("%f", &total[0].total_pembelian);
-    printf("Jumlah coupon: \n");
-    scanf("%d", &total[0].jumlah_coupon);
+int main() {
+    float total_pembelian;
 
-    if (total[0].total_pembelian >= 100000.00)
-    {
-        // Jumlah coupon if total_pembayaran lebih dari 100000
-        total[0].jumlah_coupon = 1;
+    // Meminta pengguna untuk memasukkan total pembelian
+    printf("Masukkan total pembelian: Rp. ");
+    scanf("%f", &total_pembelian);
 
-        total[0].discount_percentage = total[0].total_pembelian * 0.05 * total[0].jumlah_coupon;
-        float discount = total[0].discount_percentage; 
-        total[0].total_pembayaran = total[0].total_pembelian - discount;
+    // Inisialisasi struct Pembelian
+    struct Pembelian hasil_pembelian;
+
+    // Check apakah total pembelian mencapai minimal Rp. 100.000,00
+    if (total_pembelian >= 100000) {
+        // Menghitung jumlah kupon undian
+        hasil_pembelian.jumlah_kupon = total_pembelian / 100000;
+
+        // Menghitung diskon
+        hasil_pembelian.diskon = 0.05 * total_pembelian;
+
+        // Menghitung total yang harus dibayar setelah diskon
+        hasil_pembelian.total_bayar = total_pembelian - hasil_pembelian.diskon;
+    } else {
+        // Jika total pembelian kurang dari Rp. 100.000,00
+        hasil_pembelian.jumlah_kupon = 0;
+        hasil_pembelian.diskon = 0;
+        hasil_pembelian.total_bayar = total_pembelian;
     }
-    else
-    {
-        total[0].jumlah_coupon = 0;
-        total[0].discount_percentage = 0;
-    }
-}
 
-int main()
-{
-    struct pembelian total;
+    // Menyimpan total_pembelian ke dalam struct
+    hasil_pembelian.total_pembelian = total_pembelian;
 
-
-    hitung_pembayaran(&total);
-
-    printf("Total pembayaran setelah diskon: Rp. %.2f\n", total.total_pembayaran);
+    // Menampilkan informasi menggunakan struct
+    printf("Total pembelian: Rp. %.2f\n", hasil_pembelian.total_pembelian);
+    printf("Jumlah kupon undian: %d lembar\n", hasil_pembelian.jumlah_kupon);
+    printf("Diskon: Rp. %.2f\n", hasil_pembelian.diskon);
+    printf("Total yang harus dibayar: Rp. %.2f\n", hasil_pembelian.total_bayar);
 
     return 0;
 }
