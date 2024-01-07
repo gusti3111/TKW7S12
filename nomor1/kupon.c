@@ -21,10 +21,11 @@ int main() {
     // Check apakah total pembelian mencapai minimal Rp. 100.000,00
     if (total_pembelian >= 100000) {
         // Menghitung jumlah kupon undian
-        hasil_pembelian.jumlah_kupon = total_pembelian / 100000;
+        // hasil_pembelian.jumlah_kupon = total_pembelian / 100000;
+        hasil_pembelian.jumlah_kupon = total_pembelian/100000;
 
         // Menghitung diskon
-        hasil_pembelian.diskon = 0.05 * total_pembelian;
+        hasil_pembelian.diskon = 0.05 * total_pembelian * hasil_pembelian.jumlah_kupon;
 
         // Menghitung total yang harus dibayar setelah diskon
         hasil_pembelian.total_bayar = total_pembelian - hasil_pembelian.diskon;
