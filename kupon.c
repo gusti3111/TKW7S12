@@ -3,51 +3,43 @@
 struct pembelian
 {
     float total_pembelian;
-    float discount_precentage;
-    int  jumlah_coupon;
+    float discount_percentage;
+    int jumlah_coupon;
     float total_pembayaran;
-
 };
 
-int pembayaran(){
-        struct pembelian total;
-        if(total.total_pembayaran >= 100000.00){
-            // jumlah coupon if total_pembayaran  lebih dari 100000
-            total.jumlah_coupon = 1;
+void hitung_pembayaran(struct pembelian *total)
+{
+    // Input all components of the pembelian structure
+    printf("Total pembelian: \n");
+    scanf("%f", &total[0].total_pembelian);
+    printf("Jumlah coupon: \n");
+    scanf("%d", &total[0].jumlah_coupon);
 
+    if (total[0].total_pembelian >= 100000.00)
+    {
+        // Jumlah coupon if total_pembayaran lebih dari 100000
+        total[0].jumlah_coupon = 1;
 
-            total.discount_precentage = total.total_pembelian * 0.05;
-
-            int discount = total.discount_precentage * total.jumlah_coupon;
-            total.total_pembayaran = total.total_pembelian - discount;
-            return total.total_pembayaran;
-             
-
-
-
-
-
-
-        }else{
-                    hasil.jumlah_kupon = 0;
-        hasil.diskon = 0;
-        hasil.total_bayar = total_pembelian;
-
-
-            
-        }
-
-
+        total[0].discount_percentage = total[0].total_pembelian * 0.05 * total[0].jumlah_coupon;
+        float discount = total[0].discount_percentage; 
+        total[0].total_pembayaran = total[0].total_pembelian - discount;
+    }
+    else
+    {
+        total[0].jumlah_coupon = 0;
+        total[0].discount_percentage = 0;
+    }
 }
 
-
-int main(){
+int main()
+{
     struct pembelian total;
 
-    printf("total_pembelian:\n");
-    scanf("%f", &total.total_pembelian);
-    printf("total_pembelian %.2f", total.total_pembelian);
-    
-    
 
+    hitung_pembayaran(&total);
+
+    printf("Total pembayaran setelah diskon: Rp. %.2f\n", total.total_pembayaran);
+
+    return 0;
 }
