@@ -29,12 +29,14 @@ int main() {
 
         // Menghitung total yang harus dibayar setelah diskon
         hasil_pembelian.total_bayar = total_pembelian - hasil_pembelian.diskon;
-    } else {
+    } 
+    else {
         // Jika total pembelian kurang dari Rp. 100.000,00
         hasil_pembelian.jumlah_kupon = 0;
         hasil_pembelian.diskon = 0;
         hasil_pembelian.total_bayar = total_pembelian;
-    }
+    } 
+    
 
     // Menyimpan total_pembelian ke dalam struct
     hasil_pembelian.total_pembelian = total_pembelian;
@@ -43,7 +45,13 @@ int main() {
     printf("Total pembelian: Rp. %.2f\n", hasil_pembelian.total_pembelian);
     printf("Jumlah kupon undian: %d lembar\n", hasil_pembelian.jumlah_kupon);
     printf("Diskon: Rp. %.2f\n", hasil_pembelian.diskon);
-    printf("Total yang harus dibayar: Rp. %.2f\n", hasil_pembelian.total_bayar);
+    if (hasil_pembelian.jumlah_kupon > 20){
+        
+        hasil_pembelian.total_bayar = 0;
+        printf("Diskon melebihi 100 persen\n");
+    }
+    printf("Total yang harus dibayar: Rp. %.2f\n", hasil_pembelian.total_pembelian);
+    
 
     return 0;
 }
